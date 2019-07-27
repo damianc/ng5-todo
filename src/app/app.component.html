@@ -18,6 +18,7 @@
       <th>#</th>
       <th>Task</th>
       <th colspan="2">Done</th>
+      <th>Edit</th>
     </tr>
   </thead>
   <tbody>
@@ -28,6 +29,9 @@
       <td [ngSwitch]="item.done">
         <span *ngSwitchCase="true">Yes</span>
         <span *ngSwitchDefault>No</span>
+      </td>
+      <td>
+        <button class="btn btn-danger btn-sm" (click)="deleteItem(item)">Delete</button>
       </td>
     </tr>
   </tbody>

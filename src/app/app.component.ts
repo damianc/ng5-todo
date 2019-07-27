@@ -26,4 +26,11 @@ export class AppComponent {
       return true;
   	}
   }
+
+  deleteItem(item) {
+    var items = this.model.items;
+    var idx = items.indexOf(item);
+
+    items.splice(idx, 1);
+  }
 }
