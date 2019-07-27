@@ -5,10 +5,10 @@ export class Model {
 	constructor() {
 		this.user = 'John';
 		this.items = [
-			new TodoItem('Kupić kwiaty', false),
-			new TodoItem('Kupić buty', false),
-			new TodoItem('Odebrać bilety', true),
-			new TodoItem('Zadzwonić do Janka', false)
+			new TodoItem('Buy flowers', false),
+			new TodoItem('Buy new shoes', false),
+			new TodoItem('Receive tickets', true),
+			new TodoItem('Call to Jack', false)
 		];
 	}
 }
