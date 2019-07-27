@@ -5,6 +5,13 @@
   <button type="submit" class="btn btn-warning br-0 mt-1" (click)="addItem(todoText.value) && todoForm.reset()">Add</button>
 </form>
 
+<div class="container-fluid p-3 table-nav">
+  <label>
+    <input type="checkbox" [(ngModel)]="showDone" />
+    Show done tasks
+  </label>
+</div>
+
 <table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
@@ -25,10 +32,3 @@
     </tr>
   </tbody>
 </table>
-
-<div class="container my-5">
-  <label>
-    <input type="checkbox" [(ngModel)]="showDone" />
-    Show done tasks
-  </label>
-</div>
