@@ -9,6 +9,7 @@ import { Model, TodoItem } from './model';
 export class AppComponent {
   model = new Model();
   showDone = true;
+  edited = null;
 
   getName() {
   	return this.model.user;
@@ -20,9 +21,22 @@ export class AppComponent {
     return res;
   }
 
-  addItem(newItem) {
+  addItem(itemField) {
+    var newItem = itemField.value;
+
   	if (newItem != '') {
-  		this.model.items.push(new TodoItem(newItem, false));
+      if (this.edited === null) {
+  		  this.model.items.push(new TodoItem(newItem, false));
+      } else {
+        let item = this.edited;
+        let idx = this.model.items.indexOf(item);
+
+        itemField.value = item.action;
+        item.action = newItem;
+
+        this.model.items.splice(idx, 1, item);
+        this.edited = null;
+      }
       return true;
   	}
   }
@@ -32,5 +46,10 @@ export class AppComponent {
     var idx = items.indexOf(item);
 
     items.splice(idx, 1);
+  }
+
+  editItem(item, field) {
+    field.value = item.action;
+    this.edited = item;
   }
 }

@@ -2,7 +2,9 @@
 
 <form class="container my-5" #todoForm>
   <input class="form-control" #todoText />
-  <button type="submit" class="btn btn-warning br-0 mt-1" (click)="addItem(todoText.value) && todoForm.reset()">Add</button>
+  <button type="submit" class="btn btn-warning br-0 mt-1" (click)="addItem(todoText) && todoForm.reset()">
+    {{ edited === null ? 'Add' : 'Update' }}
+  </button>
 </form>
 
 <div class="container-fluid p-3 table-nav">
@@ -31,6 +33,7 @@
         <span *ngSwitchDefault>No</span>
       </td>
       <td>
+        <button class="btn btn-info btn-sm" (click)="editItem(item, todoText)">Edit</button>
         <button class="btn btn-danger btn-sm" (click)="deleteItem(item)">Delete</button>
       </td>
     </tr>
