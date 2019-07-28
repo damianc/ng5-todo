@@ -1,9 +1,9 @@
 export class Model {
-	user;
 	items;
 
-	constructor() {
-		this.user = 'John';
+	constructor(
+		public user: string = 'a user'
+	) {
 		this.items = [
 			new TodoItem('Buy flowers', false),
 			new TodoItem('Buy new shoes', false),
@@ -14,11 +14,8 @@ export class Model {
 }
 
 export class TodoItem {
-	action;
-	done;
-
-	constructor(action, done) {
-		this.action = action;
-		this.done = done;
-	}
+	constructor(
+		public action: string,
+		public done: boolean
+	) {}
 }

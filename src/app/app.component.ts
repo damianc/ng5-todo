@@ -7,7 +7,7 @@ import { Model, TodoItem } from './model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  model = new Model();
+  model = new Model('Johnny');
   showDone = true;
   edited = null;
 
