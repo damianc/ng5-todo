@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
+
 import { Model, TodoItem } from './model';
+import { Crudable } from '@interface/Crudable';
 
 @Component({
   selector: 'todo-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements Crudable {
   model = new Model('Johnny');
   showDone = true;
   edited = null;
@@ -15,7 +17,7 @@ export class AppComponent {
   	return this.model.user;
   }
 
-  getTodoItems() {
+  getItems() {
     var res = this.model.items;
   	if (!this.showDone) res = res.filter(item => !item.done);
     return res;
