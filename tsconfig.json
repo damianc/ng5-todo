@@ -17,7 +17,8 @@
     ],
     "baseUrl": "src",
     "paths": {
-      "@interface/*": ["app/interfaces/*"]
+      "@interface/*": ["app/interfaces/*"],
+      "@filter/*": ["app/filters/*"]
     }
   }
 }
