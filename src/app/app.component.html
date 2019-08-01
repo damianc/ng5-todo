@@ -1,8 +1,8 @@
 <h3 class="bg-warning p-4">List of {{ getName() }}</h3>
 
-<form class="container my-5" #todoForm>
+<form class="container my-5" #todoForm (submit)="addItem(todoText) && todoForm.reset()">
   <input class="form-control" #todoText />
-  <button type="submit" class="btn btn-warning br-0 mt-1" (click)="addItem(todoText) && todoForm.reset()">
+  <button type="submit" class="btn btn-warning br-0 mt-1" #btn (xclick)="addItem(todoText) && todoForm.reset()">
     {{ edited === null ? 'Add' : 'Update' }}
   </button>
 </form>
@@ -12,6 +12,11 @@
     <input type="checkbox" [(ngModel)]="showDone" />
     Show done tasks
   </label>
+  <span class="float-right">
+    Selected task:
+    <span *ngIf="selectedTask"><b>{{ selectedTask.action }}</b></span>
+    <span *ngIf="!selectedTask"><i>none</i></span>
+  </span>
 </div>
 
 <input [(ngModel)]="phrase" class="filter-input" placeholder="filter resuts..." />
@@ -26,7 +31,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of getItems(); let i = index">
+    <tr *ngFor="let item of getItems() as res; let i = index" (click)="selectTask(item)" [class.bg-warning]="selectedTask==item">
       <td>{{ item.id }}</td>
       <td>{{ item.action }} <priority [index]="i"></priority></td>
       <td><input type="checkbox" [(ngModel)]="item.done" /></td>
@@ -38,6 +43,9 @@
         <button class="btn btn-info btn-sm" (click)="editItem(item, todoText)">Edit</button>
         <button class="btn btn-danger btn-sm" (click)="deleteItem(item)">Delete</button>
       </td>
+    </tr>
+    <tr *ngIf="getItems().length == 0" class="text-danger">
+      <td colspan="5">No results</td>
     </tr>
   </tbody>
 </table>

@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Model, TodoItem } from './model';
 import { Crudable } from '@interface/Crudable';
 
+import { SearchEngine } from './search-engine';
+
 @Component({
   selector: 'todo-app',
   templateUrl: './app.component.html',
@@ -12,6 +14,7 @@ export class AppComponent implements Crudable {
   model = new Model('Johnny');
   showDone = true;
   edited = null;
+  selectedTask: TodoItem;
 
   getName() {
   	return this.model.user;
@@ -20,7 +23,7 @@ export class AppComponent implements Crudable {
   getItems() {
     var res = this.model.items;
   	if (!this.showDone) res = res.filter(item => !item.done);
-    if (this.phrase) res = res.filter(item => item.action.toLowerCase().indexOf(this.phrase.toLowerCase()) != -1);
+    if (this.phrase) res = SearchEngine.search(res, this.phrase, 'action');
     return res;
   }
 
@@ -54,5 +57,13 @@ export class AppComponent implements Crudable {
     field.value = item.action;
     field.focus();
     this.edited = item;
+  }
+
+  selectTask(item) {
+    if (this.selectedTask == item) {
+      this.selectedTask = null;
+    } else {
+      this.selectedTask = item;
+    }
   }
 }
