@@ -20,6 +20,7 @@ export class AppComponent implements Crudable {
   getItems() {
     var res = this.model.items;
   	if (!this.showDone) res = res.filter(item => !item.done);
+    if (this.phrase) res = res.filter(item => item.action.toLowerCase().indexOf(this.phrase.toLowerCase()) != -1);
     return res;
   }
 
@@ -28,7 +29,7 @@ export class AppComponent implements Crudable {
 
   	if (newItem != '') {
       if (this.edited === null) {
-  		  this.model.items.push(new TodoItem(newItem, false));
+  		  this.model.items.push(new TodoItem(newItem, false, this.model.items.length + 1));
       } else {
         let item = this.edited;
         let idx = this.model.items.indexOf(item);
@@ -44,14 +45,14 @@ export class AppComponent implements Crudable {
   }
 
   deleteItem(item) {
-    var items = this.model.items;
-    var idx = items.indexOf(item);
+    var idx = this.model.items.indexOf(item);
 
-    items.splice(idx, 1);
+    if (idx !== -1) this.model.items.splice(idx, 1);
   }
 
   editItem(item, field) {
     field.value = item.action;
+    field.focus();
     this.edited = item;
   }
 }

@@ -5,10 +5,10 @@ export class Model {
 		public user: string = 'a user'
 	) {
 		this.items = [
-			new TodoItem('Buy flowers', false),
-			new TodoItem('Buy new shoes', false),
-			new TodoItem('Receive tickets', true),
-			new TodoItem('Call to Jack', false)
+			new TodoItem('Buy flowers', false, 1),
+			new TodoItem('Buy new shoes', false, 2),
+			new TodoItem('Receive tickets', true, 3),
+			new TodoItem('Call to Jack', false, 4)
 		];
 	}
 }
@@ -16,6 +16,7 @@ export class Model {
 export class TodoItem {
 	constructor(
 		public action: string,
-		public done: boolean
+		public done: boolean,
+		public id?: number
 	) {}
 }
